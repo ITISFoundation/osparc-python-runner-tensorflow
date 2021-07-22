@@ -1,0 +1,36 @@
+services:
+  osparc-python-runner-tensorflow:
+    build:
+      labels:
+        io.simcore.authors: '{"authors": [{"name": "Manuel Guidon", "email": "guidon@itis.swiss",
+          "affiliation": "IT''IS Foundation"}]}'
+        io.simcore.contact: '{"contact": "guidon@itis.swiss"}'
+        io.simcore.description: '{"description": "oSparc Python Runner Tensorflow"}'
+        io.simcore.inputs: '{"inputs": {"input_1": {"displayOrder": 1, "label": "Input
+          data", "description": "Any code, requirements or data file", "type": "data:*/*"},
+          "input_2": {"displayOrder": 2, "label": "Additional input data - optional",
+          "description": "Any additional input data file", "type": "data:*/*"}, "input_3":
+          {"displayOrder": 3, "label": "Additional input data - optional", "description":
+          "Any additional input data file", "type": "data:*/*"}, "input_4": {"displayOrder":
+          4, "label": "Additional input data - optional", "description": "Any additional
+          input data file", "type": "data:*/*"}, "input_5": {"displayOrder": 5, "label":
+          "Additional input data - optional", "description": "Any additional input
+          data file", "type": "data:*/*"}}}'
+        io.simcore.integration-version: '{"integration-version": "1.0.0"}'
+        io.simcore.key: '{"key": "simcore/services/comp/osparc-python-runner-tensorflow"}'
+        io.simcore.name: '{"name": "oSparc Python Runner Tensorflow"}'
+        io.simcore.outputs: '{"outputs": {"output_1": {"displayOrder": 1, "label":
+          "Output data", "description": "All data produced by the script is zipped
+          as output_data.zip", "type": "data:*/*", "fileToKeyMap": {"output_data.zip":
+          "output_1"}}}}'
+        io.simcore.type: '{"type": "computational"}'
+        io.simcore.version: '{"version": "1.0.1"}'
+        org.label-schema.build-date: ${BUILD_DATE}
+        org.label-schema.schema-version: '1.0'
+        org.label-schema.vcs-ref: ${VCS_REF}
+        org.label-schema.vcs-url: https://github.com/ITISFoundation/osparc-python-runner-tensorflow
+        simcore.service.settings: '[{"name": "Resources", "type": "Resources", "value":
+            {"Limits": {"NanoCPUs": 0, "MemoryBytes": 0}, "Reservations": {"NanoCPUs":
+            0, "MemoryBytes": 0, "GenericResources": [{"DiscreteResourceSpec": {"Kind":
+            "VRAM", "Value": 1}}]}}}]'
+version: '3.7'
