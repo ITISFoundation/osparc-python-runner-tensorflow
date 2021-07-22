@@ -1,4 +1,4 @@
-FROM python:3.8.10-slim as base
+FROM nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu20.04 as base
 #
 #  USAGE:
 #     cd services/osparc-python-runner-tensorflow
@@ -20,6 +20,9 @@ RUN adduser \
 RUN apt-get update \
     && apt-get -y install --no-install-recommends \
     jq \
+    python3-minimal \
+    python3-pip \
+    python3-venv \
     && rm --recursive --force /var/lib/apt/lists/*
 
 # -------------------------- Build stage -------------------
