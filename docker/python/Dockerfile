@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.0-cudnn8-runtime-ubuntu20.04 as base
+FROM nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu18.04 as base
 #
 #  USAGE:
 #     cd services/osparc-python-runner-tensorflow
@@ -24,6 +24,12 @@ RUN apt-get update \
     python3-pip \
     python3-venv \
     && rm --recursive --force /var/lib/apt/lists/*
+
+RUN pip3 --no-cache-dir install --upgrade \
+    pip  \
+    wheel \
+    setuptools
+
 
 # -------------------------- Build stage -------------------
 # Installs build/package management tools and third party dependencies
@@ -76,7 +82,10 @@ COPY --chown=${SC_USER_NAME}:${SC_USER_NAME} service.cli/ service.cli/
 # copy binaries from build
 COPY --from=build --chown=${SC_USER_NAME}:${SC_USER_NAME} /build/bin osparc_python_runner_tensorflow
 
-RUN pip install -r osparc_python_runner_tensorflow/requirements.txt
+RUN pip3 install -r osparc_python_runner_tensorflow/requirements.txt
+
+RUN ln -s /usr/local/cuda/lib64/libcusolver.so.10 /usr/local/cuda/lib64/libcusolver.so.11
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 
 ENTRYPOINT [ "/bin/sh", "docker/entrypoint.sh", "/bin/sh", "-c" ]
 CMD ["run"]
