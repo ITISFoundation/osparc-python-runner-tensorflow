@@ -1,5 +1,5 @@
 # base
-tensorflow-gpu
+tensorflow-gpu==2.4.0 # https://www.tensorflow.org/install/source#gpu we want cuda 11.0
 
 # tools
 pipreqs
