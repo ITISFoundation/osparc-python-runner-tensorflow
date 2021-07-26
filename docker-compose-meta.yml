@@ -23,7 +23,7 @@ services:
           "Output data", "description": "All data produced by the script is zipped
           as output_data.zip", "type": "data:*/*", "fileToKeyMap": {"output_data.zip":
           "output_1"}}}}'
-        io.simcore.thumbnail: '{"thumbnail": "https://i.imgur.com/Sg9nloE.png"}'
+        io.simcore.thumbnail: '{"thumbnail": "https://i.imgur.com/iKoFIN0.png"}'
         io.simcore.type: '{"type": "computational"}'
         io.simcore.version: '{"version": "1.0.2"}'
         org.label-schema.build-date: ${BUILD_DATE}
