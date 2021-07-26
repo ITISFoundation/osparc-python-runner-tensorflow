@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.0.3-cudnn8-runtime-ubuntu20.04 as base
+FROM nvidia/cuda:11.3.0-cudnn8-runtime-ubuntu20.04 as base
 #
 #  USAGE:
 #     cd services/osparc-python-runner-tensorflow
@@ -77,7 +77,6 @@ COPY --chown=${SC_USER_NAME}:${SC_USER_NAME} service.cli/ service.cli/
 COPY --from=build --chown=${SC_USER_NAME}:${SC_USER_NAME} /build/bin osparc_python_runner_tensorflow
 
 RUN pip install -r osparc_python_runner_tensorflow/requirements.txt
-
 
 ENTRYPOINT [ "/bin/sh", "docker/entrypoint.sh", "/bin/sh", "-c" ]
 CMD ["run"]
