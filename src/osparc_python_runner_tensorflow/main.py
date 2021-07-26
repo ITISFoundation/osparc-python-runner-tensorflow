@@ -86,12 +86,14 @@ def ensure_requirements(code_dir: Path) -> Path:
 
     elif not requirements:
         # deduce requirements using pipreqs
-        logger.info("Not found. Recreating requirements ...")
+        logger.info("Not found. Create a empty requirements file...")
+        
         requirements = code_dir / "requirements.txt"
-        run_cmd(f"pipreqs --savepath={requirements} --force {code_dir}")
+        with open(requirements, 'w') as _f:
+            pass
 
-        # TODO log subprocess.run
-
+        # MaG: Tensorflow + nvidia-driver + cuda-version + nvidia runtime image + auto detection of tensorflow = OMG
+        # run_cmd(f"pipreqs --savepath={requirements} --force {code_dir}")
     else:
         requirements = requirements[0]
     return requirements
@@ -118,6 +120,7 @@ def setup():
     logger.info("Found %s as main entrypoint", main_py)
 
     logger.info("Searching requirements ...")
+    logger.info(input_dir)
     requirements = ensure_requirements(input_dir)
 
     logger.info("Preparing launch script ...")
