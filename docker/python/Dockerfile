@@ -87,5 +87,8 @@ RUN pip3 install -r osparc_python_runner_tensorflow/requirements.txt
 RUN ln -s /usr/local/cuda/lib64/libcusolver.so.10 /usr/local/cuda/lib64/libcusolver.so.11
 ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
 ENTRYPOINT [ "/bin/sh", "docker/entrypoint.sh", "/bin/sh", "-c" ]
 CMD ["run"]

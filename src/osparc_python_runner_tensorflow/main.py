@@ -18,6 +18,9 @@ input_dir, output_dir = [Path(os.environ.get(v, None)) for v in ENVIRONS]
 # TODO: sync with schema in metadata!!
 OUTPUT_FILE = "output_data.zip"
 
+FILE_DIR = os.path.realpath(__file__)
+
+
 def copy(src, dest):
     try:
         src, dest = str(src), str(dest)
@@ -53,8 +56,7 @@ def unzip_dir(parent: Path):
 
 
 def zipdir(dirpath: Path, ziph: zipfile.ZipFile):
-    """ Zips directory and archives files relative to dirpath
-    """
+    """Zips directory and archives files relative to dirpath"""
     for root, dirs, files in os.walk(dirpath):
         for filename in files:
             filepath = os.path.join(root, filename)
@@ -86,17 +88,32 @@ def ensure_requirements(code_dir: Path) -> Path:
 
     elif not requirements:
         # deduce requirements using pipreqs
-        logger.info("Not found. Create a empty requirements file...")
-        
+        logger.info("Not found. Recreating requirements ...")
         requirements = code_dir / "requirements.txt"
-        with open(requirements, 'w') as _f:
-            pass
+        run_cmd(f"pipreqs --savepath={requirements} --force {code_dir}")
 
-        # MaG: Tensorflow + nvidia-driver + cuda-version + nvidia runtime image + auto detection of tensorflow = OMG
-        # run_cmd(f"pipreqs --savepath={requirements} --force {code_dir}")
     else:
         requirements = requirements[0]
-    return requirements
+
+    # we want to make sure that no already installed libraries are being touched
+
+    # the requirements file of this service
+    runner_requirements = Path(FILE_DIR).parent / "requirements.txt"
+
+    # this will be the one from the user augmented by a constraint to the runner one
+    requirements_in = code_dir / "requirements.in"
+
+    # tmp file for creating the new one
+    tmp_requirements = code_dir / "requirements.tmp"
+
+    with open(requirements, "r") as f:
+        with open(tmp_requirements, "w") as f2:
+            f2.write(f"-c {runner_requirements}\n")
+            f2.write(f.read())
+
+    os.rename(tmp_requirements, requirements_in)
+
+    return Path(requirements_in)
 
 
 def setup():
@@ -121,7 +138,9 @@ def setup():
 
     logger.info("Searching requirements ...")
     logger.info(input_dir)
-    requirements = ensure_requirements(input_dir)
+    requirements_in = ensure_requirements(input_dir)
+
+    requirements = requirements_in.parent / "requirements.compiled"
 
     logger.info("Preparing launch script ...")
     venv_dir = Path.home() / ".venv"
@@ -130,6 +149,8 @@ def setup():
         "set -o errexit",
         "set -o nounset",
         "IFS=$(printf '\\n\\t')",
+        f"echo compiling {requirements_in} into {requirements} ...",
+        f"pip-compile --upgrade --build-isolation --output-file {requirements} {requirements_in}",
         'echo "Creating virtual environment ..."',
         f"python3 -m venv --system-site-packages --symlinks --upgrade {venv_dir}",
         f"{venv_dir}/bin/pip install -U pip wheel setuptools",

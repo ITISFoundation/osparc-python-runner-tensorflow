@@ -7,39 +7,55 @@
 absl-py==0.13.0
     # via
     #   tensorboard
+    #   tensorflow
     #   tensorflow-gpu
 astunparse==1.6.3
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 cachetools==4.2.2
     # via google-auth
 certifi==2021.5.30
     # via requests
 charset-normalizer==2.0.3
     # via requests
+click==8.0.1
+    # via pip-tools
 docopt==0.6.2
     # via pipreqs
 flatbuffers==1.12
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 gast==0.3.3
-    # via tensorflow-gpu
-google-auth==1.33.1
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
+google-auth==1.34.0
     # via
     #   google-auth-oauthlib
     #   tensorboard
 google-auth-oauthlib==0.4.4
     # via tensorboard
 google-pasta==0.2.0
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 grpcio==1.32.0
     # via
     #   tensorboard
+    #   tensorflow
     #   tensorflow-gpu
 h5py==2.10.0
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 idna==3.2
     # via requests
 keras-preprocessing==1.1.2
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 markdown==3.3.4
     # via tensorboard
 numpy==1.19.5
@@ -48,16 +64,24 @@ numpy==1.19.5
     #   keras-preprocessing
     #   opt-einsum
     #   tensorboard
+    #   tensorflow
     #   tensorflow-gpu
 oauthlib==3.1.1
     # via requests-oauthlib
 opt-einsum==3.3.0
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
+pep517==0.11.0
+    # via pip-tools
+pip-tools==6.2.0
+    # via -r requirements.in
 pipreqs==0.4.10
     # via -r requirements.in
 protobuf==3.17.3
     # via
     #   tensorboard
+    #   tensorflow
     #   tensorflow-gpu
 pyasn1==0.4.8
     # via
@@ -84,21 +108,34 @@ six==1.15.0
     #   h5py
     #   keras-preprocessing
     #   protobuf
+    #   tensorflow
     #   tensorflow-gpu
 tensorboard==2.5.0
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 tensorboard-data-server==0.6.1
     # via tensorboard
 tensorboard-plugin-wit==1.8.0
     # via tensorboard
+tensorflow==2.4.0
+    # via -r requirements.in
 tensorflow-estimator==2.4.0
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 tensorflow-gpu==2.4.0
     # via -r requirements.in
 termcolor==1.1.0
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
+tomli==1.1.0
+    # via pep517
 typing-extensions==3.7.4.3
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 urllib3==1.26.6
     # via requests
 werkzeug==2.0.1
@@ -106,12 +143,17 @@ werkzeug==2.0.1
 wheel==0.36.2
     # via
     #   astunparse
+    #   pip-tools
     #   tensorboard
+    #   tensorflow
     #   tensorflow-gpu
 wrapt==1.12.1
-    # via tensorflow-gpu
+    # via
+    #   tensorflow
+    #   tensorflow-gpu
 yarg==0.1.9
     # via pipreqs
 
 # The following packages are considered to be unsafe in a requirements file:
+# pip
 # setuptools
