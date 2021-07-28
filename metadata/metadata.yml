@@ -2,7 +2,7 @@ name: oSparc Python Runner Tensorflow
 key: simcore/services/comp/osparc-python-runner-tensorflow
 type: computational
 integration-version: 1.0.0
-version: 1.0.3
+version: 1.0.4
 description: oSparc Python Runner Tensorflow
 contact: guidon@itis.swiss
 thumbnail: https://i.imgur.com/iKoFIN0.png
